@@ -8,6 +8,7 @@ package com.misc;
  * To change this template use File | Settings | File Templates.
  */
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 public class StrPermutations {
@@ -43,11 +44,26 @@ public class StrPermutations {
         return permutations;
     }
 
+
+    private static void permute2(String prefix, String str, List permutations) {
+        int N = str.length();
+        if(N == 0) {
+            permutations.add(prefix);
+            return;
+        }
+        for(int i = 0; i < N; i++) {
+            permute2(prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, N), permutations);
+        }
+
+    }
+
     /** Test Method */
     public static void main( String[ ] args ) {
 
         String s = "ABC";
-        LinkedList<String> permutations = StrPermutations.permutations( s );
+        //LinkedList<String> permutations = StrPermutations.permutations( s );
+        List<String> permutations = new LinkedList<String>();
+        StrPermutations.permute2("", s, permutations);
 
         ListIterator<String> listItr = permutations.listIterator( );
         while( listItr.hasNext( ) ) {
