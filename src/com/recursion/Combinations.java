@@ -32,10 +32,10 @@ public class Combinations {
 
     // read in N from command line, and print all subsets among N elements
     public static void main(String[] args) {
-        int N = Integer.parseInt(args[0]);
-        String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String elements = alphabet.substring(0, N);
-
+        //int N = Integer.parseInt(args[0]);
+        //String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        //String elements = alphabet.substring(0, N);
+        String elements = "abc";
         // using first implementation
         comb1(elements);
         System.out.println();

@@ -1,5 +1,7 @@
 package com.recursion;
 
+import java.util.Arrays;
+
 /**
  * Created with IntelliJ IDEA.
  * User: abyss
@@ -48,13 +50,42 @@ public class Permutations {
         c = a[i]; a[i] = a[j]; a[j] = c;
     }
 
+    public static void perm2unique(String s) {
+        int N = s.length();
+        char[] a = new char[N];
+        for (int i = 0; i < N; i++)
+            a[i] = s.charAt(i);
+        // sort the char array
+        Arrays.sort(a);
+        perm2unique(a, N);
+    }
 
+    private static void perm2unique(char[] a, int n) {
+        if (n == 1) {
+            System.out.println(a);
+            return;
+        }
+        char lastSwap = ' ';
+        for (int i = 0; i < n; i++) {
+            if(lastSwap == a[i])
+                continue;
+            else
+                lastSwap = a[i];
 
+            swap(a, i, n-1);
+            perm2unique(a, n - 1);
+            swap(a, i, n-1);
+        }
+    }
     public static void main(String[] args) {
-        int N = Integer.parseInt(args[0]);
+        //int N = Integer.parseInt(args[0]);
         String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String elements = alphabet.substring(0, N);
+        //String elements = alphabet.substring(0, N);
+        String elements = "aba";
+
         //perm1(elements);
+        System.out.println();
+        perm2unique(elements);
         System.out.println();
         perm2(elements);
     }
