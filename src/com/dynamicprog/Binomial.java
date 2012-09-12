@@ -10,8 +10,8 @@ package com.dynamicprog;
 public class Binomial {
 
     public static void main(String[] args) {
-        int N = Integer.parseInt(args[0]);
-        int K = Integer.parseInt(args[1]);
+        int N = 3; //Integer.parseInt(args[0]);
+        int K = 2; //Integer.parseInt(args[1]);
 
         long[][] binomial = new long[N+1][K+1];
 
