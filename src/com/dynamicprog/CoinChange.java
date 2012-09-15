@@ -10,16 +10,19 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class CoinChange {
-    private final static int d[] = {4, 5};
+    private final static int d[] = {1,3, 4, 5};
     // 1, 5, 10, 25 - tender any both return same
     // 1, 3, 4, 5 - tender 7
     // 3, 4, 5 - tender 11
     // 4, 5 tender 11
 
     public static void main(String ... args) {
-        makeChangeGreedy(11);
+        makeChangeGreedy(7);
         System.out.println("--------");
-        makeChangeDynamicProg(11);
+        makeChangeDynamicProg(7);
+        System.out.println("--------");
+        makeChangeDP(7);
+
     }
 
     private static void makeChangeGreedy(int amount) {
@@ -63,6 +66,36 @@ public class CoinChange {
             System.out.print(d[num[amount]]);
             amount = amount - d[num[amount]];
         }
+
+    }
+
+    //reccurence relation
+    // c[p] = i = 1 to k min  c[p-di] + 1
+    private static void  makeChangeDP(int amount) {
+        int count[] = new int[amount + 1];
+        int index[] = new int[amount + 1];
+        for(int p = 1; p <= amount; p++) {
+            int denomIndex = 0;
+            int min = Integer.MAX_VALUE;
+            for(int i = 0; i < d.length; i++) {
+                if(d[i] <= p) {
+                    if(count[p-d[i]] < min)  {
+                        min = 1 + count[p-d[i]];
+                        denomIndex = i;
+                    }
+                }
+            }
+            count[p] = min;
+            index[p] =  denomIndex;
+
+        }
+        System.out.println("# coins val: " + count[amount]);
+
+        while (amount > 0) {
+            System.out.print(d[index[amount]]);
+            amount = amount - d[index[amount]];
+        }
+
 
     }
 }
